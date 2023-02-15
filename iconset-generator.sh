@@ -69,7 +69,7 @@ then
 	echo " "
 	usage
 else
-        python3 $PYICONSETBINDIR $1 -n $2
+	/usr/bin/env python3 $PYICONSETBINDIR $1 -n $2
 fi
 
 exit 0
