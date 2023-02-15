@@ -11,49 +11,43 @@ PYICONSETBIN="iconset-generator-core.py"
 PYICONSETBINDIR="/usr/local/bin/$PYICONSETBIN"
 THISPYBINDIR="$THISDIR/$PYICONSETBIN"
 
-if [[ $EUID -ne 0 ]]; then
-	echo "[ERROR]: This script must be run as root \t\t exiting..." 1>&2
-	exit 1
-fi
-
 function usage {
 	echo "_____________________________________________________"
 	echo "usage: iconset-generator [iconPath] [iconsetName]"
-	echo "example: iconset-generator /path/to/icons/svg myicons"
-	echo " "
 	echo "install: iconset-generator.sh install"
+	echo "example: iconset-generator /path/to/svg iconsetName"
 	exit 1
 }
 
 function setup {
-	THISDIR=$(pwd)
-	THISFILE=$1
-	THISPYBINDIR=$2
-	ICONSETBINDIR=$3
-	PYICONSETBINDIR=$4
-	PYBINURL="https://raw.githubusercontent.com/gemichelst/iconsetGen/main/hass-iconset-generator.py?token=GHSAT0AAAAAAB6AU6I2WIJUG4LWSBXQ6DLEY7NH2QQ"
-        echo "[INSTALL]: init setup ..."
-        echo "----------------------------------------------------------"
-        /usr/bin/env python3 -m pip install --quiet click numpy svgwrite svgpathtools
-	#echo "[INSTALL][1/4]: download binaries -- done"
-        #curl $PYBINURL -o $PYICONSETBINDIR
-	echo "[INSTALL][1/3]: python requirements -- done"
-        cp $THISFILE $ICONSETBINDIR
-        cp $THISPYBINDIR $PYICONSETBINDIR
-        echo "[INSTALL][2/3]: cp binaries -- done"
-	#echo "[SRC]: $THISFILE"
-	#echo "[DEST]: $ICONSETBINDIR"
-	chmod +x $ICONSETBINDIR
-	chmod +x $PYICONSETBINDIR
-	chmod 0775 $ICONSETBINDIR
-	chmod 0775 $PYICONSETBINDIR
-	echo "[INSTALL][3/3]: chmod binaries -- done"
-	echo "----------------------------------------------------------"
-	echo "[INSTALL]: completed"
-	echo " "
-	echo " "
-	echo " "
-	usage
+	if [[ $EUID -ne 0 ]]; then
+		echo "[ERROR]: install must be run as root! \t\t exiting..." 1>&2
+		exit 1
+	else
+		THISDIR=$(pwd)
+		THISFILE=$1
+		THISPYBINDIR=$2
+		ICONSETBINDIR=$3
+		PYICONSETBINDIR=$4
+		echo "[INSTALL]: setup init"
+		echo "----------------------------------------------------------"
+		/usr/bin/env python3 -m pip install --quiet -r requirements.txt
+		echo "[INSTALL][1/3]: python requirements \t\t done"
+		cp $THISFILE $ICONSETBINDIR
+		cp $THISPYBINDIR $PYICONSETBINDIR
+		echo "[INSTALL][2/3]: cp binaries \t\t done"
+		chmod +x $ICONSETBINDIR
+		chmod +x $PYICONSETBINDIR
+		chmod 0775 $ICONSETBINDIR
+		chmod 0775 $PYICONSETBINDIR
+		echo "[INSTALL][3/3]: chmod binaries \t\t done"
+		echo "----------------------------------------------------------"
+		echo "[INSTALL]: setup completed"
+		echo " "
+		echo " "
+		echo " "
+		usage
+	fi
 }
 
 if [ -z $1 ]
