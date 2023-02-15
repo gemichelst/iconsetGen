@@ -30,7 +30,7 @@ def write_docs_file(path, namespace, svgs):
     """Write merged SVG paths into a HTML file that can be used to look up the wanted icon."""
 
     if not namespace:
-        namespace = "hass-iconset"
+        namespace = "noname-iconset"
 
     html_head = """
     <!DOCTYPE html>
@@ -314,7 +314,7 @@ def write_docs_file(path, namespace, svgs):
         </div>
         """
 
-    with open(os.path.join(path, f"{namespace}-docs.html"), "w") as html:
+    with open(os.path.join(path, f"{namespace}.html"), "w") as html:
         html.write(html_head)
         for n, svg in enumerate(svgs):
             html.write(tpl.format(svg["name"], svg["path"]))
@@ -346,7 +346,7 @@ def convert_svgs(path, namespace, enum):
             counter += 1
         else:
             svgs.append({"name": file[:-4], "path": path})
-    write_hass_file(workpath, namespace, svgs)
+    #write_hass_file(workpath, namespace, svgs)
     write_docs_file(workpath, namespace, svgs)
     
 if __name__ == "__main__":
