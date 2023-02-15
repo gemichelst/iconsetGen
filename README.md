@@ -4,9 +4,9 @@ A small script which generates an html file with
 all svg files found in given folder
 
 
-´´´bash
+```bash
 git clone git@github.com:gemichelst/iconsetGen.git
-´´´
+```
 
 ## REQUIREMENTS
 
@@ -14,21 +14,20 @@ git clone git@github.com:gemichelst/iconsetGen.git
 - []
 
 ## USAGE as binary
-bla
 
 ### GET INFORMATION
-´´´bash
+```bash
 sudo bash iconset-generator.sh env
-´´´
+```
 
 ### INSTALL
-´´´bash
+```bash
 sudo bash iconset-generator.sh install
-´´´
+```
 
 ### GENERATE
-´´´bash
+```bash
 iconset-generator.sh /path/to/svg/folder mySVGs
-´´´
+```
 
 
