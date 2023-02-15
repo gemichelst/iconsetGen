@@ -12,7 +12,7 @@ all svg files found in given folder source folder
 
 ### CLONE
 ```bash
-git clone git@github.com:gemichelst/iconsetGen.git
+git clone https://github.com/gemichelst/iconsetGen.git
 ```
 
 ### INSTALL AS BINARY
