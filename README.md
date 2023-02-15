@@ -35,4 +35,4 @@ iconset-generator env
 
 ## THANKS
 thanks to the devs from the original repo where i forked the python code from.
-[https://github.com/Bouni/hass-iconset-generator](https://github.com/Bouni/hass-iconset-generator)s
+- [https://github.com/Bouni/hass-iconset-generator](https://github.com/Bouni/hass-iconset-generator)
