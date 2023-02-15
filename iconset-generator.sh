@@ -28,11 +28,12 @@ function setup {
 	THISFILE=$1
 	ICONSETBINDIR=$2
 	PYICONSETBINDIR=$3
+	PYBINURL="https://raw.githubusercontent.com/gemichelst/iconsetGen/main/hass-iconset-generator.py?token=GHSAT0AAAAAAB6AU6I2WIJUG4LWSBXQ6DLEY7NH2QQ"
         echo "[INSTALL]: init setup ..."
         echo "----------------------------------------------------------"
         /usr/bin/env python3 -m pip install --quiet click numpy svgwrite svgpathtools
 	echo "[INSTALL][1/4]: download binaries -- done"
-        curl https://raw.githubusercontent.com/Bouni/hass-iconset-generator/master/hass-iconset-generator.py -o $PYICONSETBINDIR
+        curl $PYBINURL -o $PYICONSETBINDIR
 	echo "[INSTALL][2/4]: python requirements -- done"
         cp $THISFILE $ICONSETBINDIR
         echo "[INSTALL][3/4]: cp binaries -- done"
