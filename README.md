@@ -27,7 +27,7 @@ sudo bash iconset-generator.sh install
 
 ### GENERATE
 ```bash
-iconset-generator.sh /path/to/svg/folder mySVGs
+iconset-generator /path/to/svg/folder mySVGs
 ```
 
 
