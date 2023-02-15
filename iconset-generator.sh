@@ -4,11 +4,12 @@
 # $1 = /path/to/svgs/icons $2 = name
 # or use install for setup
 THISDIR=$(pwd)
-THISFILE="$THISDIR/iconset-generator.sh"
 ICONSETBIN="iconset-generator"
+THISFILE="$THISDIR/$ICONSETBIN.sh"
 ICONSETBINDIR="/usr/local/bin/$ICONSETBIN"
 PYICONSETBIN="iconset-generator-core.py"
 PYICONSETBINDIR="/usr/local/bin/$PYICONSETBIN"
+THISPYBINDIR="$THISDIR/$PYICONSETBIN"
 
 if [[ $EUID -ne 0 ]]; then
 	echo "[ERROR]: This script must be run as root \t\t exiting..." 1>&2
@@ -25,25 +26,28 @@ function usage {
 }
 
 function setup {
+	THISDIR=$(pwd)
 	THISFILE=$1
-	ICONSETBINDIR=$2
-	PYICONSETBINDIR=$3
+	THISPYBINDIR=$2
+	ICONSETBINDIR=$3
+	PYICONSETBINDIR=$4
 	PYBINURL="https://raw.githubusercontent.com/gemichelst/iconsetGen/main/hass-iconset-generator.py?token=GHSAT0AAAAAAB6AU6I2WIJUG4LWSBXQ6DLEY7NH2QQ"
         echo "[INSTALL]: init setup ..."
         echo "----------------------------------------------------------"
         /usr/bin/env python3 -m pip install --quiet click numpy svgwrite svgpathtools
-	echo "[INSTALL][1/4]: download binaries -- done"
-        curl $PYBINURL -o $PYICONSETBINDIR
-	echo "[INSTALL][2/4]: python requirements -- done"
+	#echo "[INSTALL][1/4]: download binaries -- done"
+        #curl $PYBINURL -o $PYICONSETBINDIR
+	echo "[INSTALL][1/3]: python requirements -- done"
         cp $THISFILE $ICONSETBINDIR
-        echo "[INSTALL][3/4]: cp binaries -- done"
+        cp $THISPYBINDIR $PYICONSETBINDIR
+        echo "[INSTALL][2/3]: cp binaries -- done"
 	#echo "[SRC]: $THISFILE"
 	#echo "[DEST]: $ICONSETBINDIR"
 	chmod +x $ICONSETBINDIR
 	chmod +x $PYICONSETBINDIR
 	chmod 0775 $ICONSETBINDIR
 	chmod 0775 $PYICONSETBINDIR
-	echo "[INSTALL][4/4]: chmod binaries -- done"
+	echo "[INSTALL][3/3]: chmod binaries -- done"
 	echo "----------------------------------------------------------"
 	echo "[INSTALL]: completed"
 	echo " "
@@ -57,11 +61,12 @@ then
 	usage
 elif [ $1 == "install" ]
 then
-	setup $THISFILE $ICONSETBINDIR $PYICONSETBINDIR
+	setup $THISFILE $THISPYBINDIR $ICONSETBINDIR $PYICONSETBINDIR
 elif [ $1 == "env" ]
 then
 	echo "0: $0"
 	echo "THISFILE: $THISFILE"
+	echo "THISPYBINDIR: $THISPYBINDIR"
 	echo "ICONSETBIN: $ICONSETBIN"
 	echo "ICONSETBINDIR: $ICONSETBINDIR"
 	echo "PYICONSETBIN: $PYICONSETBIN"
@@ -70,6 +75,7 @@ then
 	usage
 else
 	/usr/bin/env python3 $PYICONSETBINDIR $1 -n $2
+	echo "[DONE]: $1/$2.html"
 fi
 
 exit 0
