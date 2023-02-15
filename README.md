@@ -1,33 +1,35 @@
 # DESCRIPTION
 
-A small script which generates an html file with
-all svg files found in given folder
+A small script which generates an html which contains
+all svg files found in given folder source folder
 
+## REQUIREMENTS
 
+- [Python3.x](https://www.python.org/downloads/)
+- packages from requirements.txt
+
+## INSTALL
+
+### CLONE
 ```bash
 git clone git@github.com:gemichelst/iconsetGen.git
 ```
 
-## REQUIREMENTS
-
-- [Python](https://www.python.org/downloads/)
-- []
-
-## USAGE as binary
-
-### GET INFORMATION
-```bash
-sudo bash iconset-generator.sh env
-```
-
-### INSTALL
+### INSTALL AS BINARY
+needs sudo for cp and chmod
 ```bash
 sudo bash iconset-generator.sh install
 ```
+
+## USAGE as binary
 
 ### GENERATE
 ```bash
 iconset-generator /path/to/svg/folder mySVGs
 ```
 
+### GET INFORMATION
+```bash
+iconset-generator env
+```
 
