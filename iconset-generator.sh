@@ -36,10 +36,12 @@ function setup {
 	echo "[INSTALL][2/4]: python requirements -- done"
         cp $THISFILE $ICONSETBINDIR
         echo "[INSTALL][3/4]: cp binaries -- done"
-	echo "[SRC]: $THISFILE"
-	echo "[DEST]: $ICONSETBINDIR"
+	#echo "[SRC]: $THISFILE"
+	#echo "[DEST]: $ICONSETBINDIR"
 	chmod +x $ICONSETBINDIR
 	chmod +x $PYICONSETBINDIR
+	chmod 0775 $ICONSETBINDIR
+	chmod 0775 $PYICONSETBINDIR
 	echo "[INSTALL][4/4]: chmod binaries -- done"
 	echo "----------------------------------------------------------"
 	echo "[INSTALL]: completed"
@@ -54,7 +56,7 @@ then
 	usage
 elif [ $1 == "install" ]
 then
-	setup $THISFILE ICONSETBINDIR $PYICONSETBINDIR
+	setup $THISFILE $ICONSETBINDIR $PYICONSETBINDIR
 elif [ $1 == "env" ]
 then
 	echo "0: $0"
